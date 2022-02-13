@@ -1,4 +1,6 @@
 ﻿using FluentAssertions;
+using System.Globalization;
+using System.Threading;
 using Xunit;
 
 namespace BikeDistributor.Domain
@@ -9,10 +11,16 @@ namespace BikeDistributor.Domain
         private static readonly Bike Elite = new Bike("Specialized", "Venge Elite", Bike.TwoThousand);
         private static readonly Bike DuraAce = new Bike("Specialized", "S-Works Venge Dura-Ace", Bike.FiveThousand);
 
+        public OrderTest()
+        {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
+        }
+
         [Fact]
         public void ReceiptOneDefy()
         {
-			//Arrange
+            
+            //Arrange
             var order = new Order(1, "Anywhere Bike Shop");
             order.AddLine(new OrderLine(Defy, 1));
 
